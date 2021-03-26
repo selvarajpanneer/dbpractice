@@ -35,7 +35,6 @@ public class RollandCommit{
 	                    "values(12342,'ramesh',24,'junior engineer');");
 				stmt.executeUpdate("insert into employee(empid,empname,age,designation) "+
 	                    "values(12343,'mani',25,'accountant');");
-				con.rollback();
 				con.commit();
 				int i=0;
 				while(i<1000) {
