@@ -10,6 +10,7 @@ void removeChanges();
 void closeConnection();
 void insertData(int id, String name,int age,String hometown);
 void insertData(int id, String name,int age,String hometown,String designation);
-ArrayList<Student> getStudentData();
+
+	ArrayList<Student> getStudentData();
 ArrayList<Employee> getEmployeeData();
 }
