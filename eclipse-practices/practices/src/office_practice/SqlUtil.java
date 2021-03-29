@@ -25,6 +25,7 @@ public class SqlUtil {
 	ArrayList<Person> selectPerson = new ArrayList<Person>();
 	
 	public void createConnection() {
+		if(connection==null) {
 		try{  
 			Class.forName(URL);  
 			connection=(Connection) DriverManager.getConnection(CREDENTIAL,USER_NAME,PASSWORD);  
@@ -32,7 +33,7 @@ public class SqlUtil {
 			statement=(Statement) connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
 	                ResultSet.CONCUR_UPDATABLE);
 		}catch(Exception e){ System.out.println(e);}  
-			
+		}
 	}
 	public void createTable() {
 		execute(EMPLOYEE_TABLE);
