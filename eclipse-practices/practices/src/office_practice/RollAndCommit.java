@@ -49,10 +49,12 @@ public class RollAndCommit{
 		userFriendly(execute);
 		break;
 		case 8:execute.closeConnection();
+		scanner.close();
 		userFriendly(execute);
 		break;
 		case 9:System.out.println("connection created........");
 		execute.createConnection();
+		entryData(execute);
 		break;
 		default:System.out.println("retry");
 		userFriendly(execute);	

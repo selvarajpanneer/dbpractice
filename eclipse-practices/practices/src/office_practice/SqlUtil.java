@@ -55,6 +55,16 @@ public class SqlUtil implements Executable{
 			try {
 				connection.rollback();
 			} catch (SQLException e) {
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
 				e.printStackTrace();
 			}
 		}
@@ -75,6 +85,7 @@ public class SqlUtil implements Executable{
 			preparedStatement.setInt(3, age);
 			preparedStatement.setString(4, hometown);
 			int rowAffected=preparedStatement.executeUpdate();
+			preparedStatement.close();
 			if(rowAffected==1) {
 				System.out.println("data inserted successfully...");
 			}
@@ -92,6 +103,7 @@ public class SqlUtil implements Executable{
 			preparedStatement.setString(4, hometown);
 			preparedStatement.setString(5, designation);
 			int rowAffected=preparedStatement.executeUpdate();
+			preparedStatement.close();
 			if(rowAffected==1) {
 				System.out.println("data inserted successfully...");	
 			}
