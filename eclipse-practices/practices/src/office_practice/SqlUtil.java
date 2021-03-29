@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 
 
-public class SqlUtil {
+public class SqlUtil implements Executable{
 	private final static String  URL="com.mysql.jdbc.Driver";
 	 private final static String CREDENTIAL="jdbc:mysql://localhost:3306/selva";
 	 private final static String USER_NAME="ksr94";
