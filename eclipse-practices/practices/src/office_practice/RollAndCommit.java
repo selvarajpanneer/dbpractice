@@ -3,6 +3,7 @@ package office_practice;
 import java.util.ArrayList;
 import java.util.Scanner;
 public class RollAndCommit{
+	static String userGuide="press 3 for commit, 4 for rollback, press 5 enter data,\n press 6 get stuent data,press 7 get employee data,\n press 8 close connection, press 9 create connection";
 	public static void main(String[] args) {
 		Executable execute= new SqlUtil();
 		execute.createConnection();
@@ -28,29 +29,33 @@ public class RollAndCommit{
 		int input = scanner.nextInt();
 		switch(input) {
 		case 3:execute.applyChanges();
-		System.out.println("press 3 for commit, 4 for rollback, press 5 enter data, press 6 get stuent data,press 7 get employee data, press 8 close connection, press 9 create connection");
-		rollAndCommit(execute);
+		userFriendly(execute);
 		break;
 		case 4:execute.removeChanges();
-		System.out.println("press 3 for commit, 4 for rollback, press 5 enter data, press 6 get stuent data,press 7 get employee data, press 8 close connection, press 9 create connection");
-		rollAndCommit(execute);
+		userFriendly(execute);
 		break;
 		case 5:entryData(execute);
 		break;
-		case 6:execute.getStudentData();
-		System.out.println("press 3 for commit, 4 for rollback, press 5 enter data, press 6 get stuent data,press 7 get employee data, press 8 close connection, press 9 create connection");
-		rollAndCommit(execute);
+		case 6:ArrayList<Student>studentList =execute.getStudentData();
+		for(Student student:studentList) {
+			System.out.println("student id: "+student.getId()+" student name: "+student.getName()+" student age: "+student.getAge()+" student hometown: "+student.getHometown());
+		}
+		userFriendly(execute);
 		break;
-		case 7:execute.getEmployeeData();
-		System.out.println("press 3 for commit, 4 for rollback, press 5 enter data, press 6 get stuent data,press 7 get employee data, press 8 close connection, press 9 create connection");
-		rollAndCommit(execute);
+		case 7:ArrayList<Employee>employeeList =execute.getEmployeeData();
+		for(Employee employee:employeeList) {
+			System.out.println("employee id: "+employee.getId()+" employee name: "+employee.getName()+" employee age: "+employee.getAge()+" employee hometown: "+employee.getHometown()+" employee designation: "+employee.getDesignation());
+		}
+		userFriendly(execute);
 		break;
 		case 8:execute.closeConnection();
-		System.out.println("press 3 for commit, 4 for rollback, press 5 enter data, press 6 get stuent data,press 7 get employee data, press 8 close connection, press 9 create connection");
-		rollAndCommit(execute);
+		userFriendly(execute);
 		break;
 		case 9:System.out.println("connection created........");
-			execute.createConnection();
+		execute.createConnection();
+		break;
+		default:System.out.println("retry");
+		userFriendly(execute);	
 		}
 	}
 	private static void studentEntry(Scanner scanner,Executable execute) {
@@ -67,7 +72,6 @@ public class RollAndCommit{
 		if(name!=null) {
 			System.out.print("enter age: ");
 			int age=scanner.nextInt();
-			String ageString=String.valueOf(age);
 			System.out.println();
 			if(age!=0) {
 				System.out.print("enter home town: ");
@@ -75,8 +79,7 @@ public class RollAndCommit{
 				System.out.println();
 				if(hometown!=null) 
 					execute.insertData(id,name,age,hometown);
-					System.out.println("press 3 for commit, 4 for rollback, press 5 enter data, press 6 get stuent data,press 7 get employee data, press 8 close connection, press 9 create connection");
-					rollAndCommit(execute);
+				userFriendly(execute);
 			}
 		}
 		}	
@@ -104,8 +107,7 @@ public class RollAndCommit{
 					String designation=scanner.next();
 					if(designation!=null)
 					execute.insertData(id, name, age, hometown, designation);
-					System.out.println("press 3 for commit, 4 for rollback, press 5 enter data, press 6 get stuent data,press 7 get employee data, press 8 close connection, press 9 create connection");
-					rollAndCommit(execute);
+					userFriendly(execute);
 				}
 			}
 		}
@@ -114,10 +116,15 @@ public class RollAndCommit{
 	}
 	public static void commit(Executable execute) {
 		execute.applyChanges();
-		System.out.println("press 5 for get student record, press 6 for get employee record");
+		userFriendly(execute);
 	}
 	public static void rollback(Executable execute) {
 		execute.removeChanges();
+		userFriendly(execute);
+	}
+	public static void userFriendly(Executable execute) {
+		System.out.println(userGuide);
+		rollAndCommit(execute);
 	}
 }
 

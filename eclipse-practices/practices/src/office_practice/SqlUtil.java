@@ -11,6 +11,8 @@ import java.util.ArrayList;
 
 
 public class SqlUtil implements Executable{
+	ArrayList<Student> studentList;
+	ArrayList<Employee> employeeList;
 	private final static String  URL="com.mysql.jdbc.Driver";
 	 private final static String CREDENTIAL="jdbc:mysql://localhost:3306/selva";
 	 private final static String USER_NAME="ksr94";
@@ -106,7 +108,8 @@ public void execute(String query){
 		
 }
 
-public void getStudentData() {
+public ArrayList<Student> getStudentData() {
+ArrayList<Student> temporaryStudentList= new ArrayList<Student>();
 	String sql ="select * from student";
 	ResultSet studentResult=null;
 	try {
@@ -118,15 +121,18 @@ public void getStudentData() {
 	System.out.println("student data");
 	try {
 		while(studentResult.next()) {
-			System.out.println("student id "+studentResult.getInt(2)+", student name "+studentResult.getString(3)+", student age "+studentResult.getInt(4)+", student hometown "+studentResult.getString(5));
+	temporaryStudentList.add(new Student(studentResult.getInt(2),studentResult.getString(3),studentResult.getInt(4),studentResult.getString(5)));
 		}
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
+	studentList = temporaryStudentList;
+	return studentList;
 }
-public void getEmployeeData() {
+public ArrayList<Employee> getEmployeeData() {
 	String sql ="select * from employee";
+	ArrayList<Employee> temporaryEmployeeList = new ArrayList<Employee>();
 	ResultSet employeeResult=null;
 	try {
 	    employeeResult=statement.executeQuery(sql);
@@ -137,11 +143,13 @@ public void getEmployeeData() {
 	System.out.println("employee data");
 	try {
 		while(employeeResult.next()) {
-			System.out.println("employee id "+employeeResult.getInt(2)+" , employee name "+employeeResult.getString(3)+", employee age "+employeeResult.getInt(4)+", employee hometown "+employeeResult.getString(5)+", employee designation "+employeeResult.getString(6));
+			temporaryEmployeeList.add(new Employee(employeeResult.getInt(2),employeeResult.getString(3),employeeResult.getInt(4),employeeResult.getString(5)));
 		}
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
+	employeeList=temporaryEmployeeList;
+	return employeeList;
 }
 }
